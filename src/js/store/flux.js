@@ -20,6 +20,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
+				const cargar = async () => {
+					try {
+						const response = await fetch("https://www.swapi.tech/api/people/");
+						const data = await response.json();
+						setStore({ personajes: data.results });
+					} catch (error) {
+						console.log(error);
+					}
+				};
+				cargar();
+
 				/**
 					fetch().then().then(data => setStore({ "foo": data.bar }))
 				*/
