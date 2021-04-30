@@ -12,7 +12,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					background: "white",
 					initial: "white"
 				}
-			]
+			],
+			personajes: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -20,11 +21,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().changeColor(0, "green");
 			},
 			loadSomeData: () => {
+				const buscarStore = getStore();
 				const cargar = async () => {
 					try {
 						const response = await fetch("https://www.swapi.tech/api/people/");
 						const data = await response.json();
-						setStore({ personajes: data.results });
+						const datos = data.results;
+						// setStore({ personajes: data.results });
+
+						//fetch de personajes especifico
+						let especificos = data.results.map(dato => {
+							return fetch(dato.url).then(resp => {
+								let respuesta = resp.json();
+								return respuesta;
+							});
+						});
+
+						const prueba = async variable => {
+							const porfa = await Promise.all(variable).then(function(results) {
+								console.log(results);
+								return results;
+							});
+							console.log(porfa, "este es porfa");
+							return porfa;
+						};
+
+						const dios = prueba(especificos);
+						console.log(dios, "este es dios");
 					} catch (error) {
 						console.log(error);
 					}

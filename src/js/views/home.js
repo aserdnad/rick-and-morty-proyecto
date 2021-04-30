@@ -6,7 +6,7 @@ import { Row, Col } from "react-bootstrap";
 
 export const Home = () => {
 	const { store } = useContext(Context);
-	console.log(store);
+	// console.log(store);
 	return (
 		<div className="container">
 			<Row>
