@@ -13,7 +13,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					initial: "white"
 				}
 			],
-			personajes: []
+			personajes: [],
+			lugares: [],
+			episodios: [],
+			favoritos: []
 		},
 		actions: {
 			// Use getActions to call a function within a fuction
@@ -24,30 +27,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const buscarStore = getStore();
 				const cargar = async () => {
 					try {
-						const response = await fetch("https://www.swapi.tech/api/people/");
+						const response = await fetch("https://rickandmortyapi.com/api/character");
 						const data = await response.json();
 						const datos = data.results;
-						// setStore({ personajes: data.results });
+						setStore({ personajes: datos });
 
-						//fetch de personajes especifico
-						let especificos = data.results.map(dato => {
-							return fetch(dato.url).then(resp => {
-								let respuesta = resp.json();
-								return respuesta;
-							});
-						});
+						const response1 = await fetch("https://rickandmortyapi.com/api/location");
+						const data1 = await response1.json();
+						const datos1 = data1.results;
+						setStore({ lugares: datos1 });
 
-						const prueba = async variable => {
-							const porfa = await Promise.all(variable).then(function(results) {
-								console.log(results);
-								return results;
-							});
-							console.log(porfa, "este es porfa");
-							return porfa;
-						};
-
-						const dios = prueba(especificos);
-						console.log(dios, "este es dios");
+						const response2 = await fetch("https://rickandmortyapi.com/api/episode");
+						const data2 = await response2.json();
+						const datos2 = data2.results;
+						setStore({ episodios: datos2 });
 					} catch (error) {
 						console.log(error);
 					}
@@ -71,6 +64,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
+			},
+			agregarFavoritos: nombre => {
+				const store = getStore();
+				if (!store.favoritos.includes(nombre)) {
+					setStore({ favoritos: [...store.favoritos, nombre] });
+				}
+			},
+			eliminarFavoritos: nombre => {
+				const store = getStore();
+				let actualizar = store.favoritos.filter(personaje => {
+					return personaje !== nombre;
+				});
+				setStore({ favoritos: actualizar });
 			}
 		}
 	};
