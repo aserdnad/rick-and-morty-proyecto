@@ -28,30 +28,27 @@ export const Home = () => {
 					})}
 			</Row>
 			<h1 className="text-danger mt-3">Locations</h1>
-			{/* <Row>
+			<Row>
 				{store["lugares"] &&
-					store.lugares.map(personaje => {
+					store.lugares.map(lugare => {
 						return (
-							<Col key={lugares.created}>
-								<Location nombre={lugares.name} dimension={lugares.dimension} type={lugares.type} />
+							<Col key={lugare.created}>
+								<Location nombre={lugare.name} dimension={lugare.dimension} type={lugare.type} />
 							</Col>
 						);
 					})}
-			</Row> */}
+			</Row>
 			<h1 className="text-danger mt-3">Episodes</h1>
-			{/* <Row>
+			<Row>
 				{store["episodios"] &&
-					store.episodios.map(personaje => {
+					store.episodios.map(episodio => {
 						return (
-							<Col key={episodios.created}>
-								<Location 
-								nombre={episodios.name} 
-								episode={episodios.episode} 
-								air={episodios.air_date} />
+							<Col key={episodio.created}>
+								<Location nombre={episodio.name} episode={episodio.episode} air={episodio.air_date} />
 							</Col>
 						);
 					})}
-			</Row> */}
+			</Row>
 		</div>
 	);
 };
