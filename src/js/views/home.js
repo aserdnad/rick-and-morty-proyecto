@@ -14,7 +14,7 @@ export const Home = () => {
 			<h1 className="text-danger">Characters</h1>
 			<Row>
 				{store["personajes"] &&
-					store.personajes.map(personaje => {
+					store.personajes.map((personaje, index) => {
 						return (
 							<Col key={personaje.created}>
 								<Personaje
@@ -22,6 +22,7 @@ export const Home = () => {
 									image={personaje.image}
 									gender={personaje.gender}
 									species={personaje.species}
+									index={index}
 								/>
 							</Col>
 						);
@@ -30,10 +31,15 @@ export const Home = () => {
 			<h1 className="text-danger mt-3">Locations</h1>
 			<Row>
 				{store["lugares"] &&
-					store.lugares.map(lugare => {
+					store.lugares.map((lugare, index) => {
 						return (
 							<Col key={lugare.created}>
-								<Location nombre={lugare.name} dimension={lugare.dimension} type={lugare.type} />
+								<Location
+									nombre={lugare.name}
+									dimension={lugare.dimension}
+									type={lugare.type}
+									index={index}
+								/>
 							</Col>
 						);
 					})}
@@ -41,10 +47,15 @@ export const Home = () => {
 			<h1 className="text-danger mt-3">Episodes</h1>
 			<Row>
 				{store["episodios"] &&
-					store.episodios.map(episodio => {
+					store.episodios.map((episodio, index) => {
 						return (
 							<Col key={episodio.created}>
-								<Location nombre={episodio.name} episode={episodio.episode} air={episodio.air_date} />
+								<Episodes
+									nombre={episodio.name}
+									episode={episodio.episode}
+									air={episodio.air_date}
+									index={index}
+								/>
 							</Col>
 						);
 					})}
